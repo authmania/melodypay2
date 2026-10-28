@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en-NG">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0828" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>MelodyPay — Admin</title>
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #0a0828;
+        --bg-2: #120d3d;
+        --surface: #18124a;
+        --surface-2: #1e1657;
+        --border: rgba(139, 92, 246, 0.28);
+        --border-strong: rgba(168, 85, 247, 0.55);
+        --text: #ffffff;
+        --text-2: #c9c3f0;
+        --text-3: #8f88c4;
+        --violet: #8b5cf6;
+        --magenta: #d946ef;
+        --pink: #ec4899;
+        --green: #22c55e;
+        --danger: #f43f5e;
+        --grad-brand: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #d946ef 100%);
+        --shadow: 0 10px 40px -12px rgba(168, 85, 247, 0.55);
+      }
+      * { box-sizing: border-box; }
+      html, body { overflow-x: clip; max-width: 100%; }
+      body {
+        margin: 0;
+        font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(1100px 520px at 50% -12%, rgba(124, 58, 237, 0.35), transparent 60%),
+          radial-gradient(900px 480px at 100% 100%, rgba(217, 70, 239, 0.16), transparent 55%),
+          var(--bg);
+        background-attachment: fixed;
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      /* login */
+      #loginOverlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(10, 8, 40, 0.96);
+        z-index: 100;
+        padding: 1rem;
+      }
+      .login-card {
+        width: min(100%, 420px);
+        padding: 2.6rem 2rem;
+        border-radius: 26px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        text-align: center;
+        box-shadow: var(--shadow);
+      }
+      .login-logo {
+        width: 64px; height: 64px;
+        margin: 0 auto 1.1rem;
+        border-radius: 18px;
+        background: var(--grad-brand);
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 12px 30px rgba(168, 85, 247, 0.45);
+      }
+      .login-logo img { width: 78%; height: 78%; object-fit: contain; display: block; }
+      .login-card h2 { font-size: 1.55rem; font-weight: 800; margin: 0 0 0.3rem; }
+      .login-card h2 span { background: var(--grad-pink); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .login-card p { font-size: 0.86rem; color: var(--text-3); margin: 0 0 1.6rem; }
+      .login-input {
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border-radius: 14px;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-size: 1rem;
+        font-family: inherit;
+        outline: none;
+        margin-bottom: 0.8rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .login-input::placeholder { color: var(--text-3); }
+      .login-input:focus { border-color: var(--border-strong); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.18); }
+      .login-error { font-size: 0.82rem; color: #fda4af; margin-bottom: 0.7rem; min-height: 1.2em; }
+      .login-btn {
+        width: 100%;
+        padding: 0.95rem;
+        border-radius: 14px;
+        background: var(--grad-brand);
+        border: none;
+        color: #fff;
+        font-weight: 700;
+        font-size: 1rem;
+        font-family: inherit;
+        cursor: pointer;
+        transition: transform 0.2s, filter 0.2s;
+      }
+      .login-btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+      .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+      #adminShell { display: none; }
+
+      .admin-header {
+        position: sticky; top: 0;
+        padding: 0.9rem 1.6rem;
+        background: rgba(16, 11, 51, 0.86);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+        display: flex; align-items: center; justify-content: space-between;
+        z-index: 10;
+      }
+      .admin-logo {
+        display: flex; align-items: center; gap: 11px;
+        font-size: 1.2rem; font-weight: 800;
+        text-decoration: none; color: var(--text);
+      }
+      .admin-logo .admin-mark {
+        width: 36px; height: 36px; border-radius: 11px;
+        background: var(--grad-brand);
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden;
+      }
+      .admin-logo .admin-mark img { width: 76%; height: 76%; object-fit: contain; }
+      .admin-logo span { background: var(--grad-pink); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .admin-header-right { display: flex; align-items: center; gap: 10px; }
+      .admin-badge {
+        padding: 0.28rem 0.85rem; border-radius: 999px;
+        background: rgba(139, 92, 246, 0.16);
+        border: 1px solid var(--border);
+        font-size: 0.72rem; font-weight: 700; color: var(--text-2);
+      }
+      .save-all {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 0.55rem 1.15rem;
+        border: none; border-radius: 999px;
+        background: var(--grad-brand);
+        color: #fff; font-size: 0.8rem; font-weight: 700; font-family: inherit;
+        cursor: pointer;
+        transition: transform 0.2s, filter 0.2s;
+        box-shadow: 0 8px 22px -8px rgba(168, 85, 247, 0.7);
+      }
+      .save-all svg { height: 0.9rem; width: 0.9rem; }
+      .save-all:hover { filter: brightness(1.08); transform: translateY(-1px); }
+      .save-all:disabled { opacity: 0.6; cursor: not-allowed; }
+
+      .admin-body { width: min(100%, 900px); margin: 0 auto; padding: 2rem 1.6rem 5rem; }
+      .admin-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        padding: 1.6rem 1.8rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow);
+      }
+      .admin-card-title {
+        font-size: 0.78rem; font-weight: 700; color: var(--text-3);
+        text-transform: uppercase; letter-spacing: 0.11em;
+        margin-bottom: 1.3rem;
+      }
+
+      .toggle-row {
+        display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+        background: var(--bg-2); border: 1px solid var(--border);
+        border-radius: 14px; padding: 14px 18px; margin-bottom: 16px;
+      }
+      .toggle-label { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+      .toggle-label small { font-weight: 400; color: var(--text-3); font-size: 11px; }
+      .toggle-switch { position: relative; width: 48px; height: 26px; flex-shrink: 0; cursor: pointer; }
+      .toggle-switch input { opacity: 0; width: 0; height: 0; }
+      .toggle-slider {
+        position: absolute; inset: 0; background: #3b3268; border-radius: 999px; transition: 0.3s; cursor: pointer;
+      }
+      .toggle-slider::before {
+        content: ""; position: absolute; height: 20px; width: 20px; left: 3px; bottom: 3px;
+        background: #fff; border-radius: 50%; transition: 0.3s;
+      }
+      .toggle-switch input:checked + .toggle-slider { background: var(--violet); }
+      .toggle-switch input:checked + .toggle-slider::before { transform: translateX(22px); }
+      .toggle-status { font-size: 12px; font-weight: 700; min-width: 44px; color: var(--text-3); }
+      .toggle-status.active { color: var(--green); }
+      .toggle-status.inactive { color: var(--danger); }
+
+      .link-input {
+        width: 100%; padding: 0.85rem 1.1rem;
+        border-radius: 13px;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-size: 0.92rem; font-family: inherit;
+        outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .link-input::placeholder { color: var(--text-3); }
+      .link-input:focus { border-color: var(--border-strong); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.18); }
+      .current-link-label { font-size: 0.76rem; color: var(--text-3); margin-bottom: 0.4rem; font-weight: 500; display: block; }
+      .current-link-value {
+        font-size: 0.82rem; color: var(--text-2); word-break: break-all;
+        background: var(--bg-2); border: 1px solid var(--border);
+        padding: 0.6rem 1rem; border-radius: 10px;
+        font-family: ui-monospace, monospace; margin-bottom: 0.55rem;
+      }
+      .block { display: grid; gap: 0.35rem; margin-bottom: 1rem; }
+      .block:last-child { margin-bottom: 0; }
+      .divider { height: 1px; background: var(--border); margin: 16px 0; }
+
+      .admin-footer { display: flex; justify-content: center; margin-top: 1.4rem; }
+      .signout {
+        display: inline-flex; align-items: center; gap: 0.4rem;
+        font-size: 0.8rem; font-weight: 600; color: var(--text-2);
+        border: 1px solid var(--border); border-radius: 999px;
+        padding: 0.55rem 1.4rem; background: transparent; cursor: pointer;
+      }
+      .signout:hover { color: #fda4af; border-color: rgba(244, 63, 94, 0.5); background: rgba(244, 63, 94, 0.1); }
+
+      @media (max-width: 640px) {
+        .login-card { padding: 2rem 1.3rem; }
+        .admin-header { padding: 0.8rem 1rem; }
+        .admin-logo { font-size: 1rem; gap: 8px; }
+        .admin-badge { display: none; }
+        .admin-body { padding: 1.2rem 1rem 3rem; }
+        .admin-card { padding: 1.2rem 1.1rem; border-radius: 18px; margin-bottom: 1.1rem; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="loginOverlay">
+      <div class="login-card">
+        <div class="login-logo"><img src="images/melodypay-mark.png" alt="MelodyPay" /></div>
+        <h2>Admin <span>Access</span></h2>
+        <p>Enter the admin password to continue</p>
+        <input type="password" id="passwordInput" class="login-input" placeholder="Password" autocomplete="current-password" />
+        <div class="login-error" id="loginError"></div>
+        <button class="login-btn" id="loginBtn">Enter Dashboard</button>
+      </div>
+    </div>
+
+    <div id="adminShell">
+      <header class="admin-header">
+        <a href="index.html" class="admin-logo">
+          <span class="admin-mark"><img src="images/melodypay-mark.png" alt="MelodyPay" /></span> Melody<span>Pay</span>
+        </a>
+        <div class="admin-header-right">
+          <span class="admin-badge">Admin</span>
+          <button class="save-all" id="saveAllBtn" type="button" style="display:none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            Save Changes
+          </button>
+        </div>
+      </header>
+
+      <div class="admin-body">
+
+        <div class="admin-card">
+          <div class="admin-card-title">Payment Link Settings</div>
+          <div class="toggle-row">
+            <div class="toggle-label">
+              Enable Payment Links
+              <small>(Use payment links instead of bank transfer)</small>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;margin-left:auto;">
+              <span class="toggle-status" id="toggleStatusDisplay">OFF</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="usePaymentLinkToggle" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <label class="block">
+            <span class="current-link-label">Payment / redirect link</span>
+            <div class="current-link-value" id="currentPaymentLink1Display">Loading…</div>
+            <input type="url" class="link-input" id="paymentLink1Input" placeholder="https://flutterwave.com/pay/…" />
+          </label>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-title">Payment Account Details</div>
+          <label class="block">
+            <span class="current-link-label">Bank name</span>
+            <input type="text" class="link-input" id="bankNameInput" placeholder="e.g. Opay" />
+          </label>
+          <label class="block">
+            <span class="current-link-label">Account name</span>
+            <input type="text" class="link-input" id="accountNameInput" placeholder="e.g. JOHN DOE" />
+          </label>
+          <label class="block">
+            <span class="current-link-label">Account number</span>
+            <input type="text" class="link-input" id="accountNumberInput" placeholder="e.g. 0123456789" />
+          </label>
+          <label class="block">
+            <span class="current-link-label">Price / Access Fee (₦)</span>
+            <input type="number" class="link-input" id="membershipPriceInput" placeholder="15000" min="0" step="100" />
+          </label>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-title">Telegram Redirect Link</div>
+          <label class="block">
+            <span class="current-link-label">Current link</span>
+            <div class="current-link-value" id="currentLinkDisplay">Loading…</div>
+            <input type="url" class="link-input" id="tgLinkInput" placeholder="https://t.me/your_channel_or_group" />
+          </label>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-title">WhatsApp Redirect Link</div>
+          <label class="block">
+            <span class="current-link-label">Current link</span>
+            <div class="current-link-value" id="currentWALinkDisplay">Loading…</div>
+            <input type="url" class="link-input" id="waLinkInput" placeholder="https://wa.me/2348012345678" />
+          </label>
+        </div>
+
+        <div class="admin-footer">
+          <button class="signout" id="logoutBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="height:1rem;width:1rem;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
+            Logout
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDrnmtx0LkfMKytzTKQZwXCg1JKZXiJmtU",
+        authDomain: "glamour-28049.firebaseapp.com",
+        projectId: "glamour-28049",
+        storageBucket: "glamour-28049.firebasestorage.app",
+        messagingSenderId: "22177815395",
+        appId: "1:22177815395:web:2ca7caa2b1626299675156",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app, "(default)");
+      const CONFIG_DOC = doc(db, "account", "melodypay2");
+      const SESSION_KEY = "melodypay_admin_unlocked";
+      const PASS_KEY = "melodypay:adminPassword";
+
+      function expectedPassword() {
+        try { return localStorage.getItem(PASS_KEY) || "melodypay2026"; }
+        catch (e) { return "melodypay2026"; }
+      }
+
+      function toast(msg, ok = true) {
+        const el = document.createElement("div");
+        el.textContent = msg;
+        el.style.cssText =
+          "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9999;" +
+          "padding:.8rem 1.2rem;border-radius:12px;font-family:inherit;font-size:.85rem;font-weight:600;" +
+          "color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:90vw;" +
+          "background:" + (ok ? "linear-gradient(135deg,#7c3aed,#d946ef)" : "#e11d48") + ";";
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 2600);
+      }
+
+      function revealAdmin() {
+        document.getElementById("loginOverlay").style.display = "none";
+        document.getElementById("adminShell").style.display = "block";
+        loadConfig();
+      }
+
+      function checkSession() {
+        try { if (sessionStorage.getItem(SESSION_KEY) === "1") revealAdmin(); } catch (e) { /* ignore */ }
+      }
+
+      const loginBtn = document.getElementById("loginBtn");
+      loginBtn.addEventListener("click", () => {
+        const val = document.getElementById("passwordInput").value;
+        const err = document.getElementById("loginError");
+        if (val === expectedPassword()) {
+          try { sessionStorage.setItem(SESSION_KEY, "1"); } catch (e) { /* ignore */ }
+          err.textContent = "";
+          revealAdmin();
+        } else {
+          err.textContent = "Incorrect password. Try again.";
+          document.getElementById("passwordInput").value = "";
+        }
+      });
+      document.getElementById("passwordInput").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") loginBtn.click();
+      });
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        try { sessionStorage.removeItem(SESSION_KEY); } catch (e) { /* ignore */ }
+        location.reload();
+      });
+
+      checkSession();
+
+      function updateToggleDisplay(enabled) {
+        const el = document.getElementById("toggleStatusDisplay");
+        el.textContent = enabled ? "ON" : "OFF";
+        el.className = "toggle-status " + (enabled ? "active" : "inactive");
+      }
+
+      const SAVE_FIELDS = [
+        { key: "bankName", inputId: "bankNameInput", displayId: null, label: "Bank name", url: false },
+        { key: "accountName", inputId: "accountNameInput", displayId: null, label: "Account name", url: false },
+        { key: "accountNumber", inputId: "accountNumberInput", displayId: null, label: "Account number", url: false },
+        { key: "membershipPrice", inputId: "membershipPriceInput", displayId: null, label: "Price", url: false },
+        { key: "paymentLink1", inputId: "paymentLink1Input", displayId: "currentPaymentLink1Display", label: "Payment / redirect link", url: true },
+        { key: "telegramLink", inputId: "tgLinkInput", displayId: "currentLinkDisplay", label: "Telegram link", url: true },
+        { key: "whatsappLink", inputId: "waLinkInput", displayId: "currentWALinkDisplay", label: "WhatsApp link", url: true },
+      ];
+
+      let baseline = {};
+
+      function getDirtyFields() {
+        return SAVE_FIELDS.filter((f) => {
+          const val = document.getElementById(f.inputId).value.trim();
+          return val !== (baseline[f.key] || "");
+        });
+      }
+
+      function refreshSaveButton() {
+        const btn = document.getElementById("saveAllBtn");
+        btn.style.display = getDirtyFields().length ? "inline-flex" : "none";
+      }
+
+      SAVE_FIELDS.forEach((f) => {
+        document.getElementById(f.inputId).addEventListener("input", refreshSaveButton);
+      });
+
+      async function loadConfig() {
+        try {
+          const snap = await getDoc(CONFIG_DOC);
+          const data = snap.exists() ? snap.data() : {};
+
+          document.getElementById("bankNameInput").value = data.bankName || "";
+          document.getElementById("accountNameInput").value = data.accountName || "";
+          document.getElementById("accountNumberInput").value = data.accountNumber || "";
+          document.getElementById("membershipPriceInput").value = data.membershipPrice != null ? data.membershipPrice : 15000;
+
+          const tgLink = data.telegramLink || "";
+          document.getElementById("currentLinkDisplay").textContent = tgLink || "Not set";
+          document.getElementById("tgLinkInput").value = tgLink;
+
+          const waLink = data.whatsappLink || "";
+          document.getElementById("currentWALinkDisplay").textContent = waLink || "Not set";
+          document.getElementById("waLinkInput").value = waLink;
+
+          const paymentLink1 = data.paymentLink1 || "";
+          document.getElementById("currentPaymentLink1Display").textContent = paymentLink1 || "Not set";
+          document.getElementById("paymentLink1Input").value = paymentLink1;
+
+          const usePaymentLink = !!data.usePaymentLink;
+          document.getElementById("usePaymentLinkToggle").checked = usePaymentLink;
+          updateToggleDisplay(usePaymentLink);
+
+          SAVE_FIELDS.forEach((f) => { baseline[f.key] = document.getElementById(f.inputId).value; });
+          refreshSaveButton();
+        } catch (err) {
+          console.error("loadConfig error:", err);
+          ["currentLinkDisplay", "currentWALinkDisplay", "currentPaymentLink1Display"].forEach((id) => {
+            const el = document.getElementById(id);
+            if (el && /^Loading/.test(el.textContent.trim())) el.textContent = "Not set";
+          });
+          toast("Could not load config from Firestore.", false);
+        }
+      }
+
+      document.getElementById("usePaymentLinkToggle").addEventListener("change", async function () {
+        const enabled = this.checked;
+        this.disabled = true;
+        try {
+          await setDoc(CONFIG_DOC, { usePaymentLink: enabled }, { merge: true });
+          updateToggleDisplay(enabled);
+          toast(enabled ? "Payment links enabled!" : "Payment links disabled — bank transfer page will be used.");
+        } catch (err) {
+          this.checked = !enabled;
+          updateToggleDisplay(!enabled);
+          toast("Failed to save toggle — check Firestore rules.", false);
+          console.error("Toggle save error:", err);
+        } finally {
+          this.disabled = false;
+        }
+      });
+
+      document.getElementById("saveAllBtn").addEventListener("click", async () => {
+        const btn = document.getElementById("saveAllBtn");
+        const dirty = getDirtyFields();
+        if (!dirty.length) return;
+
+        let hasError = false;
+        dirty.forEach((f) => {
+          const val = document.getElementById(f.inputId).value.trim();
+          if (f.url && val && !/^https?:\/\//i.test(val)) {
+            toast(f.label + " must start with https://", false);
+            hasError = true;
+          }
+        });
+        if (hasError) return;
+
+        btn.disabled = true;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="height:0.9rem;width:0.9rem;"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg> Saving…';
+
+        const updates = {};
+        dirty.forEach((f) => {
+          const raw = document.getElementById(f.inputId).value.trim();
+          updates[f.key] = f.key === "membershipPrice" ? Number(raw || 0) : raw;
+        });
+
+        try {
+          await setDoc(CONFIG_DOC, updates, { merge: true });
+          dirty.forEach((f) => {
+            const val = document.getElementById(f.inputId).value.trim();
+            baseline[f.key] = val;
+            if (f.displayId) document.getElementById(f.displayId).textContent = val || "Not set";
+          });
+          refreshSaveButton();
+          toast((dirty.length === 1 ? dirty[0].label : dirty.length + " settings") + " updated!");
+        } catch (err) {
+          toast("Save failed — check Firestore rules.", false);
+          console.error("Save error:", err);
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="height:0.9rem;width:0.9rem;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg> Save Changes';
+        }
+      });
+    </script>
+  </body>
+</html>

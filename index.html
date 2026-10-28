@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MelodyPay — Listen • Tap • Earn</title>
+  <meta name="description" content="MelodyPay turns your music time into real money. Listen to songs, complete simple tap tasks and earn rewards — all from your phone." />
+  <meta name="theme-color" content="#0a0828" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="landing">
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#" class="logo" aria-label="MelodyPay home">
+        <img class="logo-img" src="images/melodypay-mark.png" width="457" height="283" alt="" />
+        <span class="logo-text">Melody<span>Pay</span></span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#features">Features</a>
+        <a href="#preview">Dashboard</a>
+        <a href="#how">How it works</a>
+        <a href="#calculator">Earnings</a>
+        <a href="#faq">FAQ</a>
+        <div class="nav-menu-cta">
+          <button class="btn btn-ghost btn-lg" data-auth="login">Log in</button>
+          <button class="btn btn-pink btn-lg" data-auth="signup">Join Now <i data-icon="arrow"></i></button>
+        </div>
+      </nav>
+      <div class="nav-cta">
+        <button class="btn btn-ghost nav-login" data-auth="login">Log in</button>
+        <button class="btn btn-pink nav-join" data-auth="signup">Join Now</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><i data-icon="menu"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="tagline-badge">FAST • SECURE • RELIABLE</span>
+          <div><span class="script-banner">Turn Your Music Time</span></div>
+          <h1>Into Real <span class="text-gold">Money!</span></h1>
+          <p class="hero-lead">
+            <strong>MelodyPay</strong> makes it simple! Just listen to your favourite songs,
+            complete simple tasks, and start earning — all from your phone.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-pink btn-lg" data-auth="signup">Join Now <i data-icon="arrow"></i></button>
+            <button class="btn btn-ghost btn-lg" data-auth="login">I have an account</button>
+          </div>
+          <div class="hero-stats">
+            <div><strong class="text-grad" data-count="250000" data-suffix="+">0</strong><span>Active earners</span></div>
+            <div><strong class="text-grad" data-count="48" data-prefix="₦" data-suffix="M+">0</strong><span>Paid out</span></div>
+            <div><strong class="text-grad" data-count="24" data-suffix="h">0</strong><span>Payout time</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="glow-ring"></div>
+          <div class="script-float">Your Music<br/>Your Earnings<br/>Your Time ♡</div>
+          <span class="float-note n1"><i data-icon="music"></i></span>
+          <span class="float-note n2"><i data-icon="music"></i></span>
+          <span class="float-note n3"><i data-icon="headphones"></i></span>
+          <span class="float-coin c1">₦</span>
+          <span class="float-coin c2">₦</span>
+          <span class="float-coin c3">₦</span>
+
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-notch"></div>
+              <div class="phone-status"><span>9:41</span><span>●●● ▮</span></div>
+              <div class="phone-head">
+                <span class="logo">
+                  <img class="logo-img" src="images/melodypay-mark.png" width="457" height="283" alt="" />
+                  <span class="logo-text">Melody<span>Pay</span></span>
+                </span>
+                <i data-icon="menu"></i>
+              </div>
+              <h4>Welcome back! 👑</h4>
+              <div class="muted">Your trusted earning platform</div>
+              <div class="p-wallet">
+                <span>Wallet Balance</span>
+                <strong>₦ 150,000.00 <i data-icon="eye"></i></strong>
+              </div>
+              <div class="p-grid">
+                <div class="p-tile"><i data-icon="music"></i>Listen to Music</div>
+                <div class="p-tile"><i data-icon="tap"></i>Tap Tasks</div>
+                <div class="p-tile"><i data-icon="gift"></i>Rewards</div>
+              </div>
+              <div class="p-label">Quick Access</div>
+              <div class="p-grid">
+                <div class="p-tile dark"><i data-icon="calendar"></i>Daily Check-in</div>
+                <div class="p-tile dark"><i data-icon="users"></i>Referral Bonus</div>
+                <div class="p-tile dark"><i data-icon="wallet"></i>Withdraw</div>
+              </div>
+              <div class="p-player">
+                <div class="p-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                <div class="grow"><b>Good Vibes</b><span class="muted">Lo-fi Beats</span></div>
+                <span class="p-play"><i data-icon="play"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Three ways to earn</span>
+          <h2>Good music. <span class="text-gold">Great rewards.</span></h2>
+          <p>The more you listen and tap, the more you earn. No special skills, no stress.</p>
+        </div>
+        <div class="features">
+          <article class="feature reveal">
+            <div class="feature-icon"><i data-icon="music"></i></div>
+            <h3>LISTEN <small>to Music</small></h3>
+            <p>Enjoy your favourite songs — Afrobeats, Lo-fi, Pop, Amapiano — and get rewarded for every track you finish.</p>
+            <span class="reward-tag"><span class="coin">₦</span> ₦2,000 per song</span>
+          </article>
+          <article class="feature reveal">
+            <div class="feature-icon"><i data-icon="tap"></i></div>
+            <h3>TAP <small>Tasks</small></h3>
+            <p>Complete simple tasks, watch short videos and check in daily to earn extra rewards on top of your listening.</p>
+            <span class="reward-tag"><span class="coin">₦</span> ₦2,000 per task</span>
+          </article>
+          <article class="feature reveal">
+            <div class="feature-icon"><i data-icon="coins"></i></div>
+            <h3>EARN <small>Real Money</small></h3>
+            <p>Watch your wallet grow and withdraw straight to your Nigerian bank account. Invite friends for bonus cash.</p>
+            <span class="reward-tag"><span class="coin">₦</span> ₦1,000 per referral</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DASHBOARD PREVIEW ============ -->
+    <section class="section" id="preview">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Your dashboard</span>
+          <h2>Everything you earn, <span class="text-grad">in one place</span></h2>
+          <p>Track your earnings, play songs, complete tasks and withdraw — all from one simple dashboard.</p>
+        </div>
+        <div class="preview reveal">
+          <div class="preview-frame">
+            <div class="preview-bar" aria-hidden="true">
+              <span></span><span></span><span></span>
+              <div class="preview-url"><i data-icon="shield"></i> melodypay.com/dashboard</div>
+            </div>
+            <picture>
+              <source media="(max-width: 640px)" srcset="images/dashboard-preview-mobile.jpg" width="780" height="1520" />
+              <img src="images/dashboard-preview.jpg" width="2160" height="1500" loading="lazy"
+                   alt="MelodyPay dashboard showing total earnings, available balance, tasks completed, referral bonus and songs to play" />
+            </picture>
+          </div>
+          <div class="preview-tag t1"><span class="coin">₦</span> Live wallet balance</div>
+          <div class="preview-tag t2"><i data-icon="music"></i> Play &amp; earn per song</div>
+          <div class="preview-tag t3"><i data-icon="wallet"></i> Withdraw to your bank</div>
+        </div>
+        <div class="preview-cta reveal">
+          <button class="btn btn-pink btn-lg" data-auth="signup">Create your free account <i data-icon="arrow"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">How it works</span>
+          <h2>Start earning in <span class="text-grad">4 easy steps</span></h2>
+        </div>
+        <div class="steps">
+          <div class="step reveal"><h4>Create an account</h4><p>Sign up free in under a minute with your name and email.</p></div>
+          <div class="step reveal"><h4>Listen &amp; tap</h4><p>Play songs and complete quick tap tasks from your dashboard.</p></div>
+          <div class="step reveal"><h4>Watch rewards grow</h4><p>Every finished song and task adds Naira to your wallet instantly.</p></div>
+          <div class="step reveal"><h4>Withdraw</h4><p>Cash out to your bank once you reach the ₦1,000 minimum.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CALCULATOR ============ -->
+    <section class="section" id="calculator">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Earnings estimator</span>
+          <h2>See what your music time is worth</h2>
+        </div>
+        <div class="calc reveal">
+          <div>
+            <div class="calc-row">
+              <label for="songs">Songs per day <b id="songsVal">6</b></label>
+              <input type="range" id="songs" min="0" max="50" value="6" />
+            </div>
+            <div class="calc-row">
+              <label for="tasks">Tap tasks per day <b id="tasksVal">4</b></label>
+              <input type="range" id="tasks" min="0" max="20" value="4" />
+            </div>
+            <div class="calc-row">
+              <label for="refs">Friends referred per month <b id="refsVal">0</b></label>
+              <input type="range" id="refs" min="0" max="50" value="0" />
+            </div>
+          </div>
+          <div class="calc-result">
+            <span>Estimated monthly earnings</span>
+            <strong class="text-gold" id="calcTotal">₦0</strong>
+            <small>Estimate based on ₦2,000/song, ₦2,000/task and ₦1,000/referral.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EQUATION CTA ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="equation reveal">
+          <div>
+            <h2>Music + Simple Tasks = Real Rewards!</h2>
+            <p>Join thousands of Nigerians turning playlists into pocket money.</p>
+          </div>
+          <button class="btn btn-lg" data-auth="signup">Join Now <i data-icon="arrow"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">FAQ</span>
+          <h2>Questions? We've got answers.</h2>
+        </div>
+        <div class="faq reveal">
+          <details>
+            <summary>Is MelodyPay free to join? <i data-icon="chevron"></i></summary>
+            <p>Yes. Creating an account is completely free. You start earning from your very first song.</p>
+          </details>
+          <details>
+            <summary>How do I withdraw my earnings? <i data-icon="chevron"></i></summary>
+            <p>Once your balance reaches ₦1,000, tap Withdraw on your dashboard, enter your bank details and the amount. Payouts are processed within 24 hours.</p>
+          </details>
+          <details>
+            <summary>How much can I earn per day? <i data-icon="chevron"></i></summary>
+            <p>It depends on how much you listen and tap. Use the earnings estimator above to get an idea — active users earn more through daily check-ins and referrals.</p>
+          </details>
+          <details>
+            <summary>How does the referral program work? <i data-icon="chevron"></i></summary>
+            <p>Share your unique referral link. When a friend signs up and completes their first task, you get ₦1,000 added to your wallet.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TRUST STRIP ============ -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container trust">
+        <div class="trust-item reveal"><span class="trust-icon"><i data-icon="shield"></i></span><div><b>Safe &amp; Secure</b><span>Your data, our priority</span></div></div>
+        <div class="trust-item reveal"><span class="trust-icon"><i data-icon="bolt"></i></span><div><b>Fast Payouts</b><span>Get your earnings quickly</span></div></div>
+        <div class="trust-item reveal"><span class="trust-icon"><i data-icon="phone"></i></span><div><b>Easy to Use</b><span>Simple steps, big rewards</span></div></div>
+        <div class="trust-item reveal"><span class="trust-icon"><i data-icon="heart"></i></span><div><b>Trusted</b><span>By millions worldwide</span></div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#" class="logo">
+        <img class="logo-img" src="images/melodypay-mark.png" width="457" height="283" alt="" />
+        <span class="logo-text">Melody<span>Pay</span></span>
+      </a>
+      <div class="footer-tag"><i data-icon="music"></i> Listen • Tap • Earn <i data-icon="music"></i></div>
+      <small>© <span id="year"></span> MelodyPay. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <!-- ============ AUTH MODAL ============ -->
+  <div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close aria-label="Close"><i data-icon="x"></i></button>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="signup" role="tab">Sign up</button>
+        <button class="tab" data-tab="login" role="tab">Log in</button>
+      </div>
+      <h2 id="authTitle">Create your account</h2>
+      <p class="sub" id="authSub">Start turning your music time into real money.</p>
+      <form id="authForm" novalidate>
+        <div class="field" id="nameField">
+          <label for="authName">Full name</label>
+          <input class="input" id="authName" name="name" placeholder="e.g. Queen Adeyemi" autocomplete="name" />
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="authEmail">Email address</label>
+          <input class="input" id="authEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
+          <span class="field-error"></span>
+        </div>
+        <div class="field">
+          <label for="authPass">Password</label>
+          <input class="input" id="authPass" name="password" type="password" placeholder="At least 6 characters" autocomplete="new-password" />
+          <span class="field-error"></span>
+        </div>
+        <div class="field" id="confirmField">
+          <label for="authConfirm">Confirm password</label>
+          <input class="input" id="authConfirm" name="confirm" type="password" placeholder="Re-enter your password" autocomplete="new-password" />
+          <span class="field-error"></span>
+        </div>
+        <p class="field-error" id="authFormError" role="alert"></p>
+        <button class="btn btn-pink btn-block btn-lg" type="submit" id="authSubmit">Create account</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-NG">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0828" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>MelodyPay — Secure Payment</title>
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --bg: #0a0828;
+        --bg-2: #120d3d;
+        --surface: #18124a;
+        --surface-2: #1e1657;
+        --border: rgba(139, 92, 246, 0.28);
+        --border-strong: rgba(168, 85, 247, 0.55);
+        --text: #ffffff;
+        --text-2: #c9c3f0;
+        --text-3: #8f88c4;
+        --violet: #8b5cf6;
+        --magenta: #d946ef;
+        --green: #22c55e;
+        --grad-brand: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #d946ef 100%);
+        --grad-pink: linear-gradient(90deg, #c026d3, #ec4899);
+      }
+      body {
+        background:
+          radial-gradient(1100px 520px at 50% -12%, rgba(124, 58, 237, 0.35), transparent 60%),
+          radial-gradient(900px 480px at 100% 100%, rgba(217, 70, 239, 0.16), transparent 55%),
+          var(--bg);
+        background-attachment: fixed;
+        font-family: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+        color: var(--text);
+        min-height: 100vh;
+        overflow-x: hidden;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      #payPage {
+        width: 100%;
+        max-width: 520px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .top-section { text-align: center; width: 100%; margin-bottom: 24px; }
+      .security-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(139, 92, 246, 0.14);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 10px 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-2);
+        margin-bottom: 20px;
+      }
+      .security-badge svg { width: 16px; height: 16px; fill: var(--violet); }
+      .pay-logo {
+        width: 64px; height: 64px;
+        margin: 0 auto 14px;
+        border-radius: 18px;
+        background: var(--grad-brand);
+        display: flex; align-items: center; justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 12px 30px rgba(168, 85, 247, 0.45);
+      }
+      .pay-logo img { width: 78%; height: 78%; object-fit: contain; display: block; }
+      .pay-title {
+        font-size: clamp(1.35rem, 5vw, 1.75rem);
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 6px;
+        letter-spacing: -0.02em;
+      }
+      .pay-sub { font-size: 16px; font-weight: 700; background: var(--grad-pink); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .countdown-box {
+        background: rgba(139, 92, 246, 0.12);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 14px 16px;
+        text-align: center;
+        margin-bottom: 16px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-2);
+        width: 100%;
+      }
+      .countdown-box span { color: var(--magenta); font-weight: 800; }
+      .detail-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 16px 18px;
+        margin-bottom: 12px;
+        box-shadow: 0 12px 30px rgba(10, 8, 40, 0.4);
+        width: 100%;
+      }
+      .detail-label { font-size: 12px; color: var(--text-3); margin-bottom: 6px; font-weight: 500; letter-spacing: 0.3px; }
+      .detail-value { font-size: 16px; font-weight: 700; color: var(--text); }
+      .detail-value.gold { font-size: 20px; background: var(--grad-pink); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .detail-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      .copy-btn {
+        background: var(--grad-brand);
+        color: #fff; border: none; border-radius: 999px;
+        padding: 8px 18px; font-size: 13px; font-weight: 600;
+        cursor: pointer; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+        transition: 0.2s; box-shadow: 0 8px 22px -8px rgba(168, 85, 247, 0.7);
+      }
+      .copy-btn:active { transform: scale(0.96); }
+      .copy-btn.copied { background: var(--green); box-shadow: none; }
+      .done-note {
+        margin: 16px 0 20px;
+        padding: 14px 16px;
+        background: rgba(139, 92, 246, 0.12);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        font-size: 13px;
+        color: var(--text-2);
+        line-height: 1.6;
+        text-align: center;
+        width: 100%;
+      }
+      .done-note strong { color: var(--text); }
+      .contact-row { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; width: 100%; }
+      .contact-btn {
+        height: 52px; border: none; border-radius: 16px;
+        font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        transition: 0.25s; background: #229ed9; color: #fff;
+      }
+      .contact-btn:hover { transform: translateY(-2px); }
+      .contact-btn:active { transform: scale(0.97); }
+      .contact-btn svg { width: 20px; height: 20px; fill: #fff; }
+      .pay-footer { text-align: center; font-size: 12px; color: var(--text-3); margin-top: auto; padding-top: 20px; line-height: 1.6; width: 100%; }
+      .pay-footer strong { color: var(--text-2); }
+      #confirmedScreen {
+        display: none; position: fixed; inset: 0;
+        background: var(--bg); z-index: 99999;
+        align-items: center; justify-content: center; flex-direction: column;
+        padding: 40px 24px; text-align: center;
+      }
+      #confirmedScreen.show { display: flex; }
+      .confirmed-icon {
+        width: 90px; height: 90px; border-radius: 50%;
+        background: var(--grad-brand);
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 24px; animation: popIn 0.4s ease;
+        box-shadow: 0 16px 34px rgba(168, 85, 247, 0.45);
+      }
+      @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+      .confirmed-title { font-size: 26px; font-weight: 800; margin-bottom: 10px; }
+      .confirmed-sub { font-size: 15px; color: var(--text-2); line-height: 1.6; margin-bottom: 32px; max-width: 340px; }
+      .confirmed-btn {
+        width: 100%; max-width: 360px; height: 56px;
+        background: var(--grad-brand);
+        color: #fff; border: none; border-radius: 999px;
+        font-size: 16px; font-weight: 600; cursor: pointer; font-family: inherit;
+        box-shadow: 0 12px 26px rgba(168, 85, 247, 0.4); transition: 0.25s;
+      }
+      .confirmed-btn:hover { transform: translateY(-2px); }
+      .confirmed-btn.ghost { background: transparent; border: 1px solid var(--border); box-shadow: none; margin-top: 12px; color: var(--text-2); }
+    </style>
+  </head>
+  <body>
+
+    <div id="payPage">
+
+      <div class="top-section">
+        <div class="security-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          Secure MelodyPay Payment
+        </div>
+        <div class="pay-logo"><img src="images/melodypay-mark.png" alt="MelodyPay" /></div>
+        <h1 class="pay-title">Complete Your MelodyPay Payment</h1>
+        <p class="pay-sub" id="amountDisplay">₦15,000</p>
+      </div>
+
+      <div class="countdown-box">
+        Payment reservation expires in <span id="countdown">10:00</span>
+      </div>
+
+      <div class="detail-card">
+        <div class="detail-label">Access Fee</div>
+        <div class="detail-value gold" id="feeDisplay">₦15,000</div>
+      </div>
+
+      <div class="detail-card">
+        <div class="detail-label">Bank Name</div>
+        <div class="detail-value" id="bankNameVal">Loading…</div>
+      </div>
+
+      <div class="detail-card">
+        <div class="detail-label">Account Name</div>
+        <div class="detail-value" id="accountNameVal">Loading…</div>
+      </div>
+
+      <div class="detail-card">
+        <div class="detail-row">
+          <div>
+            <div class="detail-label">Account Number</div>
+            <div class="detail-value gold" id="accountNum">Loading…</div>
+          </div>
+          <button class="copy-btn" id="copyBtn" onclick="copyAccount()">Copy</button>
+        </div>
+      </div>
+
+      <div class="done-note">
+        <strong>After payment, send your proof of transfer</strong> to our support team below and your access will be activated within <strong>5–15 minutes</strong>.
+      </div>
+
+      <div class="contact-row">
+        <button class="contact-btn" id="contactBtn" onclick="contactSocial()">
+          <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          <span id="contactLabel">Contact support</span>
+        </button>
+      </div>
+
+      <p class="pay-footer">
+        Your access will be activated once your payment is confirmed.<br />
+        MelodyPay — Listen • Tap • Earn
+      </p>
+
+    </div>
+
+    <div id="confirmedScreen">
+      <div class="confirmed-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="#ffffff"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+      </div>
+      <h2 class="confirmed-title">Payment Submitted</h2>
+      <p class="confirmed-sub">Your payment proof has been sent. Our team will activate your MelodyPay access within 5–15 minutes.</p>
+      <button class="confirmed-btn" onclick="document.getElementById('confirmedScreen').classList.remove('show')">Done</button>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script>
+      (function () {
+        var FALLBACK_TG = "https://t.me/";
+        var payment = { amount: 15000 };
+
+        function setText(id, value) {
+          var el = document.getElementById(id);
+          if (el) el.textContent = value;
+        }
+
+        function applyConfig() {
+          var cfg = window.MelodyConfig || {};
+
+          setText("bankNameVal", cfg.bankName || "Not set yet");
+          setText("accountNameVal", cfg.accountName || "Not set yet");
+          setText("accountNum", cfg.accountNumber || "Not set yet");
+
+          if (Number(cfg.membershipPrice)) payment.amount = Number(cfg.membershipPrice);
+          var fmt = "₦" + Number(payment.amount).toLocaleString("en-NG");
+          setText("amountDisplay", fmt);
+          setText("feeDisplay", fmt);
+
+          window._contactUrl = cfg.telegramLink || cfg.whatsappLink || FALLBACK_TG;
+          if (cfg.whatsappLink && !cfg.telegramLink) setText("contactLabel", "Chat on WhatsApp");
+          else if (cfg.telegramLink) setText("contactLabel", "Message us on Telegram");
+        }
+
+        window.MelodyConfigReady.then(applyConfig).catch(applyConfig);
+
+        window.copyAccount = function () {
+          var num = document.getElementById("accountNum").textContent;
+          var btn = document.getElementById("copyBtn");
+          function done() {
+            btn.textContent = "Copied!";
+            btn.classList.add("copied");
+            setTimeout(function () { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 2500);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(num).then(done).catch(function () { legacyCopy(num); done(); });
+          } else { legacyCopy(num); done(); }
+        };
+
+        function legacyCopy(text) {
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); } catch (e) {}
+          document.body.removeChild(ta);
+        }
+
+        window.contactSocial = function () {
+          window.open(window._contactUrl || FALLBACK_TG, "_blank");
+          document.getElementById("confirmedScreen").classList.add("show");
+        };
+
+        var countdownTimer;
+        function startCountdown() {
+          var secs = 10 * 60;
+          clearInterval(countdownTimer);
+          countdownTimer = setInterval(function () {
+            secs--;
+            if (secs <= 0) {
+              clearInterval(countdownTimer);
+              setText("countdown", "00:00");
+              return;
+            }
+            var m = Math.floor(secs / 60).toString().padStart(2, "0");
+            var s = (secs % 60).toString().padStart(2, "0");
+            setText("countdown", m + ":" + s);
+          }, 1000);
+        }
+
+        startCountdown();
+      })();
+    </script>
+  </body>
+</html>
